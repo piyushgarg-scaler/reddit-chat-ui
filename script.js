@@ -1,9 +1,15 @@
 class ChatDOMService {
     constructor() {
+        this.LOCAL_STORAGE_KEY = "__data"
+
         this.container = document.getElementById("chat-container");
         this.__data = [{ id: "1", text: "Hey There", parentId: null }];
 
-        this.renderDOM();
+        if (localStorage.getItem(this.LOCAL_STORAGE_KEY)) {
+            this.__data = [...JSON.parse(localStorage.getItem(this.LOCAL_STORAGE_KEY))]
+        }
+
+        this.renderDOM()
     }
 
     /**
@@ -31,6 +37,9 @@ class ChatDOMService {
         const parent = this.getParentById(parentId);
         const reply = prompt(`Replying to ${parent.text}`);
         this.__data.push({ id: Date.now().toString(), text: reply, parentId });
+
+        localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.__data))
+
         this.renderDOM();
     }
 
