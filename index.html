@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .child-reply {
+        position: absolute;
+        left: -1px;
+        top: -5px;
+        height: 20px;
+        width: 12px;
+        border: 0px solid lightgrey;
+        border-bottom-left-radius: 12px;
+        border-bottom-width: 2px;
+        border-left-width: 2px;
+      }
+      .message-container {
+        display: flex;
+        gap: 15px;
+        align-items: center;
+      }
+      button {
+        border: none;
+        background: none;
+        border: 1px solid lightcoral;
+        background-color: lightcoral;
+        border-radius: 10px;
+        padding: 2px 10px;
+        color: #fff;
+        font-size: 10px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="chat-container"></div>
+    <script src="script.js"></script>
+  </body>
+</html>
