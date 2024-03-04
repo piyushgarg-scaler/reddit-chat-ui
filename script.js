@@ -44,6 +44,19 @@ class ChatDOMService {
     }
 
     /**
+     * 
+     * @param {string} id 
+     */
+    handleDeleteComment(id) {
+        const children = this.getCommentsByParentId(id);
+        for (const child of children)
+            this.handleDeleteComment(child.id);
+        this.__data = this.__data.filter(e => e.id !== id);
+        localStorage.setItem(this.LOCAL_STORAGE_KEY, JSON.stringify(this.__data))
+        this.renderDOM()
+    }
+
+    /**
      *
      * @param {DocumentFragment | null} fragment
      * @param {string | null} parentId
@@ -70,9 +83,18 @@ class ChatDOMService {
             const addReplyButton = document.createElement("button");
             addReplyButton.innerText = "Reply";
 
+            const deleteButton = document.createElement("button");
+            deleteButton.innerText = "Delete";
+
             addReplyButton.addEventListener("click", (e) => {
                 this.handleAddReply(node.id);
             });
+
+            deleteButton.addEventListener("click", (e) => {
+                this.handleDeleteComment(node.id);
+            });
+
+
 
             const container = document.createElement("div");
             container.classList.add("message-container");
@@ -83,6 +105,7 @@ class ChatDOMService {
 
             container.appendChild(titleNode);
             container.appendChild(addReplyButton);
+            container.appendChild(deleteButton);
 
             parentNode.appendChild(container);
 
